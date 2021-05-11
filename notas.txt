@@ -1,0 +1,13 @@
+rojo cemex = #df343d
+rojo resalto = #FF3B45
+rojo claro = #FCB6BA   fondo
+rojo obscuro = #740006  fondo
+
+azul cemex = #293064
+azul resalto = #4B59F7 
+azul claro = #add8e6   fondo
+azul obscuro = #101522  fondo
+
+girz= #808080
+Negro = #000
+blanco = #fff
