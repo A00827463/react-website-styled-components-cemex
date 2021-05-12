@@ -7,4 +7,3 @@ export {default as SignUp} from "../pages/SignUp";
 export {default as Admin} from "../pages/Admin";
 export {default as Leaderboard} from "../pages/Leaderboard";
 export {default as PasswordOlvidado} from "../pages/PasswordOlvidado";
-export {default as PasswordOlvidadoEspera} from "../pages/PasswordOlvidadoEspera";

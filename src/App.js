@@ -2,6 +2,8 @@
 import { Footer, Navbar, Navbar2} from "./components";
 import GlobalStyle from "./globalStyles"
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
+import PrivateRoute from './components/PrivateRoute';
 
 import Home from "./pages/HomePage/Home";
 import Instrucciones from "./pages/Instrucciones/Instrucciones";
@@ -12,34 +14,34 @@ import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import Admin from "./pages/Admin";
 import PasswordOlvidado from "./pages/PasswordOlvidado";
-import PasswordOlvidadoEspera from "./pages/PasswordOlvidadoEspera";
 import ScrollToTop from "./components/ScrollToTop";
-// import click from "./pages/SignUp/SignUpSection"
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 
 function App() {
-  // const [click, setClick] = useState(false);
-  // const handleClick = () => setClick(true);
   return (
     <Router>
+      <AuthProvider>
       <GlobalStyle/>
       <ScrollToTop/>
-      <Navbar/>
+      {/* <Navbar/> */}
       <Navbar2/>
       {/* {click ? <Navbar2/> : <Navbar/>} */}
       <Switch>
-        <Route path="/" exact component={Home}/>
-        <Route path="/instrucciones" exact component={Instrucciones}/>
-        <Route path="/leaderboard" exact component={Leaderboard}/>
-        <Route path="/perfil" exact component={Perfil}/>
+        <PrivateRoute path="/" exact component={Home}/>
+        <PrivateRoute path="/instrucciones" exact component={Instrucciones}/>
+        <PrivateRoute path="/leaderboard" exact component={Leaderboard}/>
+        <PrivateRoute path="/perfil" exact component={Perfil}/>
+        <PrivateRoute path="/admin" exact component={Admin}/>
+
         <Route path="/sign-up" exact component={SignUp}/>
         <Route path="/login" default exact component={Login}/>
-        <Route path="/admin" exact component={Admin}/>
         <Route path="/password-olvidado" exact component={PasswordOlvidado}/>
-        <Route path="/password-olvidado-espera" exact component={PasswordOlvidadoEspera}/>
       </Switch>
       <Footer/>
+      </AuthProvider>
     </Router>
   );
 }

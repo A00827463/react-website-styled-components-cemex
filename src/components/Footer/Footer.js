@@ -27,54 +27,6 @@ import {
 const Footer = () => {
   return (
     <FooterContainer>
-      {/* <FooterSubscription>
-        <FooterSubheading>
-          Join our exclusive membership to resive the news and trends
-      </FooterSubheading>
-        <FooterSubText>You can unsubscribe at any thime</FooterSubText>
-        <Form>
-            <FormInput name="email" type="email" placeholder="Your Email"/>
-            <Button fontBig>Subscribe</Button>
-        </Form>
-      </FooterSubscription>
-      <FooterLinksContainer>
-          <FooterLinksWrapper>
-              <FooterLinksItems>
-                  <FooterLinkTitle>About Us</FooterLinkTitle>
-                  <FooterLink to="/sign-up">How it works</FooterLink>
-                  <FooterLink to="/">Testimonials</FooterLink>
-                  <FooterLink to="/">Careers</FooterLink>
-                  <FooterLink to="/">Investors</FooterLink>
-                  <FooterLink to="/">Terms of Service</FooterLink>
-              </FooterLinksItems>
-              <FooterLinksItems>
-                  <FooterLinkTitle>Contact Us</FooterLinkTitle>
-                  <FooterLink to="/sign-up">How it works</FooterLink>
-                  <FooterLink to="/">Testimonials</FooterLink>
-                  <FooterLink to="/">Careers</FooterLink>
-                  <FooterLink to="/">Investors</FooterLink>
-                  <FooterLink to="/">Terms of Service</FooterLink>
-              </FooterLinksItems>
-              </FooterLinksWrapper>
-              <FooterLinksWrapper>
-              <FooterLinksItems>
-                  <FooterLinkTitle>Videos</FooterLinkTitle>
-                  <FooterLink to="/sign-up">How it works</FooterLink>
-                  <FooterLink to="/">Testimonials</FooterLink>
-                  <FooterLink to="/">Careers</FooterLink>
-                  <FooterLink to="/">Investors</FooterLink>
-                  <FooterLink to="/">Terms of Service</FooterLink>
-              </FooterLinksItems>
-              <FooterLinksItems>
-                  <FooterLinkTitle>Social Media</FooterLinkTitle>
-                  <FooterLink to="/sign-up">How it works</FooterLink>
-                  <FooterLink to="/">Testimonials</FooterLink>
-                  <FooterLink to="/">Careers</FooterLink>
-                  <FooterLink to="/">Investors</FooterLink>
-                  <FooterLink to="/">Terms of Service</FooterLink>
-              </FooterLinksItems>
-          </FooterLinksWrapper>
-      </FooterLinksContainer> */}
       <SocialMedia>
           <SocialMediaWrap>
               <SocialLogo to="/">

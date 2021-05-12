@@ -1,8 +1,25 @@
-import React from "react";
+import React, {useState} from "react";
 import { Card, Button, CardDeck } from "react-bootstrap";
 import { Container } from "../globalStyles";
+import { useAuth } from "../context/AuthContext";
+import { Link, useHistory } from "react-router-dom";
 
 const Perfil = () => {
+  const [error, setError] = useState("");
+  const { currentUser, logout } = useAuth();
+  const history = useHistory();
+
+  async function handleLogout() {
+    setError("");
+
+    try {
+      await logout();
+      history.push("/login");
+    } catch {
+      setError("Failed to log out");
+    }
+  }
+
   return (
     <Container>
       <Container>
@@ -33,47 +50,45 @@ const Perfil = () => {
           </Card.Body>
         </Card> */}
 
-<CardDeck>
-  <Card>
-    {/* <Card.Img variant="top" src="holder.js/100px160" /> */}
-    <Card.Body>
-      <Card.Title>Personal</Card.Title>
-      <Card.Text>
-      ¿Quieres cambiar tu username?
-      </Card.Text>
-      <Button variant="primary">Cambiar</Button>
-    </Card.Body>
-    <Card.Footer>
-      <small className="text-muted">Last updated 3 mins ago</small>
-    </Card.Footer>
-  </Card>
-  <Card>
-    {/* <Card.Img variant="top" src="holder.js/100px160" /> */}
-    <Card.Body>
-      <Card.Title>Seguridad</Card.Title>
-      <Card.Text>
-      ¿Quieres cambiar tu contraseña?
-      </Card.Text>
-      <Button variant="primary">Cambiar</Button>
-    </Card.Body>
-    <Card.Footer>
-      <small className="text-muted">Last updated 3 mins ago</small>
-    </Card.Footer>
-  </Card>
-  <Card>
-    {/* <Card.Img variant="top" src="holder.js/100px160" /> */}
-    <Card.Body>
-      <Card.Title>Cerrar Sesion</Card.Title>
-      <Card.Text>
-      ¿Seguro que quieres saltir?
-      </Card.Text>
-      <Button variant="primary">Salir</Button>
-    </Card.Body>
-    <Card.Footer>
-      <small className="text-muted">Last updated 3 mins ago</small>
-    </Card.Footer>
-  </Card>
-</CardDeck>
+        <CardDeck>
+          <Card>
+            {/* <Card.Img variant="top" src="holder.js/100px160" /> */}
+            <Card.Body>
+              <Card.Title>Personal</Card.Title>
+              <Card.Text>¿Quieres cambiar tu username?</Card.Text>
+              <Button variant="primary">Cambiar</Button>
+            </Card.Body>
+            <Card.Footer>
+              <small className="text-muted">Last updated 3 mins ago</small>
+            </Card.Footer>
+          </Card>
+          <Card>
+            {/* <Card.Img variant="top" src="holder.js/100px160" /> */}
+            <Card.Body>
+              <Card.Title>Seguridad</Card.Title>
+              <Card.Text>¿Quieres cambiar tu contraseña?</Card.Text>
+              <Button variant="primary">Cambiar</Button>
+            </Card.Body>
+            <Card.Footer>
+              <small className="text-muted">Last updated 3 mins ago</small>
+            </Card.Footer>
+          </Card>
+          <Card>
+            {/* <Card.Img variant="top" src="holder.js/100px160" /> */}
+            <Card.Body>
+              <Card.Title>Cerrar Sesion</Card.Title>
+              <Card.Text>¿Seguro que quieres saltir?</Card.Text>
+              <Button variant="primary">Salir</Button>
+            </Card.Body>
+            <Card.Footer>
+              <small className="text-muted">Last updated 3 mins ago</small>
+            </Card.Footer>
+          </Card>
+        </CardDeck>
+
+        <Button onClick={handleLogout}>
+          Log Out
+        </Button>
       </Container>
     </Container>
   );

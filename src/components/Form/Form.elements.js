@@ -44,6 +44,7 @@ export const Form = styled.form `
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 
     @media screen and (max-width: 820px){
         flex-direction: column;
@@ -59,7 +60,7 @@ export const FormInput = styled.input `
     border: none;
     font-size: 18px;
     border: 1px solid #fff;
-    margin: 0 0 14px 0;
+    margin: 0 20px 14px 0;
     width: 350px;
 
     &::placeholder{
