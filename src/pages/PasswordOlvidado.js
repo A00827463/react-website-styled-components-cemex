@@ -41,11 +41,10 @@ const PasswordOlvidadoSection = () => {
         <Container>
           <ContentLogin>
             <ContentLoginSubheading light>
-              Recuperar Contraseña
+              Change password
             </ContentLoginSubheading>
             <ContentLoginSubText light>
-              Ingresa tu correo para instrucciones en como restablecer tu
-              contraseña
+              Enter your email for further instructions.
             </ContentLoginSubText>
             {error && <Alert variant="danger">{error}</Alert>}
             {message && <Alert variant="success">{message}</Alert>}
@@ -58,7 +57,7 @@ const PasswordOlvidadoSection = () => {
                 required
               />
               <Button fontBig primary disabled={loading} type="submit">
-                Recuperar
+                Recover
               </Button>
             </Form>
             <br />

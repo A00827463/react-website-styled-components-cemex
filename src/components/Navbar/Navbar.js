@@ -14,26 +14,25 @@ import {
   NavItem,
   NavLinks,
   NavItemBtn,
-  NavBtnLink
+  NavBtnLink,
 } from "./Navbar.elements";
 
 const Navbar = () => {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
   const handleClick = () => setClick(!click);
-  const closeMobileMenu = () => setClick(false)
+  const closeMobileMenu = () => setClick(false);
   const showButton = () => {
-    if(window.innerWidth <=960) {
-      setButton(true)
+    if (window.innerWidth <= 960) {
+      setButton(true);
+    } else {
+      setButton(false);
     }
-    else{
-      setButton(false)
-    }
-  }
+  };
 
   useEffect(() => {
-    showButton()
-  }, [])
+    showButton();
+  }, []);
 
   window.addEventListener("resize", showButton);
 
@@ -46,8 +45,13 @@ const Navbar = () => {
               <NavIcon src={Logo} />
             </NavLogo>
             <MobileIcon onClick={handleClick}>
-              {click ? <FaTimes color="#293064;"/> : <FaBars color="#293064;"/>}
+              {click ? (
+                <FaTimes color="#293064;" />
+              ) : (
+                <FaBars color="#293064;" />
+              )}
             </MobileIcon>
+
             <NavMenu onClick={handleClick} click={click}>
               <NavItem>
                 <NavLinks to="/sign-up">Sign Up</NavLinks>
@@ -55,7 +59,7 @@ const Navbar = () => {
               <NavItemBtn>
                 {button ? (
                   <NavBtnLink to="/login">
-                    <Button primary >Login</Button>
+                    <Button primary>Login</Button>
                   </NavBtnLink>
                 ) : (
                   <NavBtnLink to="/login">

@@ -8,6 +8,9 @@ const Perfil = () => {
   const [error, setError] = useState("");
   const { currentUser, logout } = useAuth();
   const history = useHistory();
+  const refreshPage = () => {
+    window.location.reload();
+  };
 
   async function handleLogout() {
     setError("");
@@ -15,6 +18,7 @@ const Perfil = () => {
     try {
       await logout();
       history.push("/login");
+      refreshPage();
     } catch {
       setError("Failed to log out");
     }

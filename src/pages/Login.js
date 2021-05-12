@@ -21,6 +21,9 @@ const Login = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
+  const refreshPage = () => {
+    window.location.reload();
+  };
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -30,6 +33,7 @@ const Login = () => {
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
       history.push("/");
+      refreshPage();
     } catch {
       setError("Failed to log in");
     }
@@ -43,32 +47,39 @@ const Login = () => {
           <ContentLogin>
             <ContentLoginSubheading dark>Login</ContentLoginSubheading>
             <ContentLoginSubText dark>
-              Ingresa tus datos de usuario
+              Enter your user credentials to enter.
             </ContentLoginSubText>
 
             {error && <Alert variant="danger">{error}</Alert>}
             <Form onSubmit={handleSubmit}>
               <Form>
-                <FormInput name="email" type="email" placeholder="Email" ref={emailRef} required />
+                <FormInput
+                  name="email"
+                  type="email"
+                  placeholder="Email"
+                  ref={emailRef}
+                  required
+                />
               </Form>
               <Form>
                 <FormInput
                   name="password"
                   type="password"
                   placeholder="Password"
-                  ref={passwordRef} required
+                  ref={passwordRef}
+                  required
                 />
               </Form>
               <Button fontBig disabled={loading} type="submit">
-                Ingresar
+                Login
               </Button>
             </Form>
             <br />
             <CustomLink to="/password-olvidado" blue>
-              ¿Olvidaste tu constraseña?
+              Forgot your password?
             </CustomLink>
             <CustomLink to="/sign-up" blue>
-              ¿No tienes cuenta?
+              Already have an account? Sign Up
             </CustomLink>
           </ContentLogin>
         </Container>

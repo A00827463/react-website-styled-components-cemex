@@ -2,6 +2,8 @@
 import { Footer, Navbar, Navbar2} from "./components";
 import GlobalStyle from "./globalStyles"
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
+// import { useLocation } from 'react-router-dom'
+import { createBrowserHistory } from "history";
 import { AuthProvider } from "./context/AuthContext";
 import PrivateRoute from './components/PrivateRoute';
 
@@ -21,14 +23,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function App() {
+  const history = createBrowserHistory();
+  const path = history.location.pathname;
   return (
     <Router>
+      
       <AuthProvider>
       <GlobalStyle/>
       <ScrollToTop/>
-      {/* <Navbar/> */}
-      <Navbar2/>
-      {/* {click ? <Navbar2/> : <Navbar/>} */}
+      {path==="/login"||path==="/sign-up"||path==="/password-olvidado" ?<Navbar/>:<Navbar2/>}
       <Switch>
         <PrivateRoute path="/" exact component={Home}/>
         <PrivateRoute path="/instrucciones" exact component={Instrucciones}/>

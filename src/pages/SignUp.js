@@ -21,6 +21,9 @@ const SignUp = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
+  const refreshPage = () => {
+    window.location.reload();
+  };
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -34,6 +37,7 @@ const SignUp = () => {
       setLoading(true);
       await signup(emailRef.current.value, passwordRef.current.value);
       history.push("/");
+      refreshPage();
     } catch {
       setError("Failed to create an account");
     }
@@ -47,18 +51,18 @@ const SignUp = () => {
           <ContentLogin>
             <ContentLoginSubheading dark>Sign Up</ContentLoginSubheading>
             <ContentLoginSubText dark>
-              Ingresa tus datos de usuario
+              Enter your information to create an account.
             </ContentLoginSubText>
             {error && <Alert variant="danger">{error}</Alert>}
             <Form onSubmit={handleSubmit}>
               <Form>
-                <FormInput name="name" type="name" placeholder="Nombre" />
+                <FormInput name="name" type="name" placeholder="Name" />
               </Form>
               <Form>
                 <FormInput
                   name="last-name"
                   type="name"
-                  placeholder="Apellido"
+                  placeholder="Last Name"
                 />
               </Form>
               <Form>
@@ -90,19 +94,19 @@ const SignUp = () => {
                 <FormInput
                   name="password"
                   type="password"
-                  placeholder="Repetir Password"
+                  placeholder="Confirm Password"
                   ref={passwordConfirmRef}
                   required
                 />
               </Form>
               <Button disabled={loading} type="submit" fontBig>
-                Registrarse
+                Create Account
               </Button>
             </Form>
             <br />
             <CustomLink to="/login" blue>
               {" "}
-              ¿Ya tienes cuenta?{" "}
+              Already have an account? Login{" "}
             </CustomLink>
           </ContentLogin>
         </Container>
