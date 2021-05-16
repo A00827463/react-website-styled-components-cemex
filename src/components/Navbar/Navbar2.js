@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { FaBars, FaTimes, FaUserCircle, FaMedal, FaClipboardList, FaHome } from "react-icons/fa";
 import { IconContext } from "react-icons/lib";
 import { Button } from "../../globalStyles";
 import Logo from "../../images/Cemex_logo.png";
@@ -50,29 +50,21 @@ const Navbar = () => {
             </MobileIcon>
             <NavMenu onClick={handleClick} click={click}>
               <NavItem>
-                <NavLinks to="/">Home</NavLinks>
+                <NavLinks to="/"><FaHome style={{color:"#293064", fontSize:"25px", paddingRight:"5px"}}/>Home</NavLinks>
               </NavItem>
 
               <NavItem>
-                <NavLinks to="/instrucciones">Instructions</NavLinks>
+                <NavLinks to="/instrucciones"><FaClipboardList style={{color:"#293064", fontSize:"20px", paddingRight:"5px"}}/>Instructions</NavLinks>
               </NavItem>
 
               <NavItem>
-                <NavLinks to="/leaderboard">Leaderboard</NavLinks>
+                <NavLinks to="/leaderboard"><FaMedal style={{color:"#293064", fontSize:"25px", paddingRight:"5px"}}/>Leaderboard</NavLinks>
               </NavItem>
-              <NavItemBtn>
-                {button ? (
-                  <NavBtnLink to="/perfil">
-                    <Button primary>Profile</Button>
-                  </NavBtnLink>
-                ) : (
-                  <NavBtnLink to="/perfil">
-                    <Button fontBig primary>
-                      Profile
-                    </Button>
-                  </NavBtnLink>
-                )}
-              </NavItemBtn>
+
+              <NavItem>
+                <NavLinks to="/perfil"><FaUserCircle style={{color:"#293064", fontSize:"25px", paddingRight:"5px"}}/>Profile</NavLinks>
+              </NavItem>
+
               <NavItemBtn>
                 {button ? (
                   <NavBtnLink to="/admin">

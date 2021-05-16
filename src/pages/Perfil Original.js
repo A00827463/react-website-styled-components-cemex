@@ -8,12 +8,12 @@ const Perfil = () => {
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const [show, setShow] = useState(true);
   const history = useHistory();
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
   const { currentUser, updatePassword, updateEmail, logout } = useAuth();
+  
 
   const refreshPage = () => {
     window.location.reload();
@@ -30,44 +30,27 @@ const Perfil = () => {
     }
   }
 
-  async function handleEmail(e) {
-    e.preventDefault();
-    try {
-      setMessage("");
-      setError("");
-      setLoading(true);
-      if (emailRef.current.value !== currentUser.email) {
-        await updateEmail(emailRef.current.value);
-      }
-      setMessage("Email updated succesfully");
-    } catch {
-      setError("Failed to update Email, try again later");
-    }
-    setLoading(false);
-  }
-
-  async function handlePassword(e) {
+  async function handleUpdate(e) {
     e.preventDefault();
 
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
       return setError("Passwords do not match");
-    }
-    if (passwordRef.current.value.length <= 5) {
-      return setError("Password to short");
     }
 
     const promises = [];
     setMessage("");
     setError("");
     setLoading(true);
-
+    if (emailRef.current.value !== currentUser.email) {
+      promises.push(updateEmail(emailRef.current.value));
+    }
     if (passwordRef.current.value) {
       promises.push(updatePassword(passwordRef.current.value));
     }
 
     Promise.all(promises)
       .then(() => {
-        setMessage("Password updated succesfully");
+        history.push("/perfil");
       })
       .catch(() => {
         setError("Failed to update account");
@@ -80,13 +63,14 @@ const Perfil = () => {
   return (
     <Container>
       <Container>
-        {error && <Alert variant="danger">{error}</Alert>}
-        {message && <Alert variant="success">{message}</Alert>}
         <CardDeck>
+
           <Card>
             <Card.Body>
-              <h2 className="text-center mb-4">Update Email</h2>
-              <Form onSubmit={handleEmail}>
+              <h2 className="text-center mb-4">Update Profile</h2>
+              {error && <Alert variant="danger">{error}</Alert>}
+              {message && <Alert variant="success">{message}</Alert>}
+              <Form onSubmit={handleUpdate}>
                 <Form.Group id="email">
                   <Form.Label>Email</Form.Label>
                   <Form.Control
@@ -96,17 +80,6 @@ const Perfil = () => {
                     defaultValue={currentUser.email}
                   />
                 </Form.Group>
-                <Button disabled={loading} className="w-100" type="submit">
-                  Update
-                </Button>
-              </Form>
-            </Card.Body>
-          </Card>
-
-          <Card>
-            <Card.Body>
-              <h2 className="text-center mb-4">Update Password</h2>
-              <Form onSubmit={handlePassword}>
                 <Form.Group id="password">
                   <Form.Label>Password</Form.Label>
                   <Form.Control
@@ -132,19 +105,14 @@ const Perfil = () => {
 
           <Card>
             <Card.Body>
-              <h2 className="text-center mb-4">Log Out</h2>
-              <Card.Text className="text-center mb-4">
-                You shure you whant to log out?
-              </Card.Text>
-              <Button
-                variant="primary"
-                className="w-100"
-                onClick={handleLogout}
-              >
+            <h2 className="text-center mb-4">Log Out</h2>
+              <Card.Text className="text-center mb-4">You shure you whant to log out?</Card.Text>
+              <Button variant="primary" className="w-100" onClick={handleLogout}>
                 Log Out
               </Button>
             </Card.Body>
           </Card>
+
         </CardDeck>
       </Container>
     </Container>
