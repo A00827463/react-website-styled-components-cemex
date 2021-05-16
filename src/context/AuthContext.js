@@ -28,8 +28,8 @@ export function AuthProvider({ children }) {
   function updateEmail(email){
     return currentUser.updateEmail(email)
   }
-  function updatePassword(email){
-    return currentUser.updateEmail(email)
+  function updatePassword(password){
+    return currentUser.updatePassword(password)
   }
 
   useEffect(() => {
