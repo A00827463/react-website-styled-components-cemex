@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { Link, useHistory } from "react-router-dom";
 import { Container, Button } from "../globalStyles";
@@ -25,19 +25,46 @@ const Login = () => {
     window.location.reload();
   };
 
+
   async function handleSubmit(e) {
     e.preventDefault();
 
+    /*  */
+    // setError("");
+    // setLoading(true);
+    // if(login(emailRef.current.value, passwordRef.current.value)){
+    //   history.push("/");
+    //   refreshPage();
+    // } else {
+    //   setError('Unable to log in');
+    // }
+    // setLoading(false);
+
+    
+    /*------------- FireBase -------------*/
     try {
       setError("");
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
       history.push("/");
       refreshPage();
-    } catch {
-      setError("Failed to log in");
+    } catch(err) {
+      setError(err.message);
     }
     setLoading(false);
+    /*------------- FireBase -------------*/
+
+
+    // try {
+    //   setError("");
+    //   setLoading(true);
+    //   await login(emailRef.current.value, passwordRef.current.value);
+    //   history.push("/");
+    //   refreshPage();
+    // } catch (err) {
+    //   setError('Unable to log in');
+    // }
+    // setLoading(false);
   }
 
   return (

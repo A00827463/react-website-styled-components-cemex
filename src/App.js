@@ -17,14 +17,17 @@ import Login from "./pages/Login";
 import Admin from "./pages/Admin";
 import PasswordOlvidado from "./pages/PasswordOlvidado";
 import ScrollToTop from "./components/ScrollToTop";
-
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+// import express from 'express';
 
 
 
 function App() {
   const history = createBrowserHistory();
   const path = history.location.pathname;
+  // const app = express();
+
   return (
     <Router>
       

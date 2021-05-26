@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container } from "../globalStyles";
 import { Table } from "react-bootstrap";
 
@@ -11,6 +11,20 @@ const Leadreboard = () => {
     { id: 5, name: "Chistian", score: 200 },
     { id: 6, name: "Adrian", score: 150 },
   ];
+
+  useEffect(() => {
+    fetch("/leaderboard", {
+      method: "POST",
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+      })
+      .then((jsonRes) => {
+        jsonRes.recordset.map(user => dataUsuarios.push({id: user.UserID, name: user.Name, score: user.Score}))
+      });
+  })
 
   const [data, setData] = useState(dataUsuarios);
 

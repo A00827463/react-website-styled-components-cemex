@@ -28,20 +28,22 @@ const SignUp = () => {
   async function handleSubmit(e) {
     e.preventDefault();
 
+
+    /*------------- FireBase -------------*/
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
       return setError("Passwords do not match");
     }
-
     try {
       setError("");
       setLoading(true);
       await signup(emailRef.current.value, passwordRef.current.value);
       history.push("/");
       refreshPage();
-    } catch {
-      setError("Failed to create an account");
+    } catch(err) {
+      setError(err.message);
     }
     setLoading(false);
+    /*------------- FireBase -------------*/
   }
 
   return (
