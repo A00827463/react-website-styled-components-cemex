@@ -4,7 +4,7 @@
 
 const express = require("express");
 const app = express();
-// const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
 const sql = require("mssql");
 const config2 = require("./config2");
 
@@ -59,7 +59,8 @@ app.post("/login", async (req, res) => {
 app.post("/signup", async (req, res) => {
   try {
     await sql.connect(config2);
-    const result = await sql.query`INSERT INTO Users VALUES(${req.body.id}, ${req.body.name}, ${req.body.lastName}, 0, ${req.body.email}, ${req.body.password}, 0)`
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    const result = await sql.query`INSERT INTO Users VALUES(${req.body.id}, ${req.body.name}, ${req.body.lastName}, ${req.body.admin}, ${req.body.email}, ${hashedPassword}, 0)`
     console.log(result);
     res.json(result);
   } catch (e) {

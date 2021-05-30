@@ -14,7 +14,7 @@ export function AuthProvider({ children }) {
   const [dbEmail, setDbEmail] = useState();
   const [dbPassword, setDbPassword] = useState();
 
-  function signup(id, name, lastName, email, password) {
+  function signup(email, password) {
     /*------------- Azure DataBase Api-------------*/
     // let data = {
     //   id: id,

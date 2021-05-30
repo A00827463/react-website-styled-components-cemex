@@ -8,11 +8,11 @@ import { Modal, ModalBody, ModalHeader, ModalFooter } from "reactstrap";
 const Admin = () => {
   const dataUsuarios = [
     { id: 1, name: "Mark", score: 400 },
-    { id: 2, name: "Sebas", score: 300 },
-    { id: 3, name: "Juan", score: 300 },
-    { id: 4, name: "Esteban", score: 250 },
-    { id: 5, name: "Chistian", score: 200 },
-    { id: 6, name: "Adrian", score: 150 },
+    // { id: 2, name: "Sebas", score: 300 },
+    // { id: 3, name: "Juan", score: 300 },
+    // { id: 4, name: "Esteban", score: 250 },
+    // { id: 5, name: "Chistian", score: 200 },
+    // { id: 6, name: "Adrian", score: 150 },
   ];
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const Admin = () => {
       .then((jsonRes) => {
         jsonRes.recordset.map(user => dataUsuarios.push({id: user.UserID, name: user.Name, score: user.Score}))
       });
-  })
+  });
 
   const [data, setData] = useState(dataUsuarios);
   const [modalEditar, setModalEditar] = useState(false);
@@ -97,7 +97,7 @@ const Admin = () => {
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Username</th>
+                <th>Name</th>
                 <th>Score</th>
                 <th>Actions</th>
               </tr>
@@ -231,10 +231,10 @@ const Admin = () => {
                 <label>ID</label>
                 <input
                   className="form-control"
-                  // readOnly
+                  readOnly
                   type="text"
                   name="id"
-                  // value={data[data.length - 1].id + 1}
+                  value={data[data.length - 1].id + 1}
                 />
                 <br />
 

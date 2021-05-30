@@ -15,6 +15,7 @@ import { Alert } from "react-bootstrap";
 
 const SignUp = () => {
   const nameRef = useRef();
+  const adminRef = useRef();
   const IdRef = useRef();
   const lastNameRef = useRef();
   const emailRef = useRef();
@@ -39,11 +40,13 @@ const SignUp = () => {
     try {
       setError("");
       setLoading(true);
-      await signup(IdRef.current.value, nameRef.current.value, lastNameRef.current.value, emailRef.current.value, passwordRef.current.value);
+      await signup(emailRef.current.value, passwordRef.current.value);
+
       let data = {
         id: IdRef.current.value,
         name: nameRef.current.value,
         lastName: lastNameRef.current.value,
+        admin: adminRef.current.value,
         email: emailRef.current.value,
         password: passwordRef.current.value
       };
@@ -76,7 +79,7 @@ const SignUp = () => {
               <Form>
                 <FormInput
                   name="id"
-                  type="text"
+                  type="number"
                   placeholder="ID"
                   ref={IdRef}
                   required
@@ -94,13 +97,15 @@ const SignUp = () => {
                   required
                 />
               </Form>
-              {/* <Form>
+              <Form>
                 <FormInput
-                  name="user-name"
-                  type="name"
-                  placeholder="Username"
+                  name="admin"
+                  type="number"
+                  placeholder="Admin"
+                  ref={adminRef}
+                  required
                 />
-              </Form> */}
+              </Form>
               <Form>
                 <FormInput
                   name="email"

@@ -5,11 +5,11 @@ import { Table } from "react-bootstrap";
 const Leadreboard = () => {
   const dataUsuarios = [
     { id: 1, name: "Mark", score: 400 },
-    { id: 2, name: "Sebas", score: 300 },
-    { id: 3, name: "Juan", score: 300 },
-    { id: 4, name: "Esteban", score: 250 },
-    { id: 5, name: "Chistian", score: 200 },
-    { id: 6, name: "Adrian", score: 150 },
+    // { id: 2, name: "Sebas", score: 300 },
+    // { id: 3, name: "Juan", score: 300 },
+    // { id: 4, name: "Esteban", score: 250 },
+    // { id: 5, name: "Chistian", score: 200 },
+    // { id: 6, name: "Adrian", score: 150 },
   ];
 
   useEffect(() => {
