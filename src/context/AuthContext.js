@@ -14,9 +14,12 @@ export function AuthProvider({ children }) {
   const [dbEmail, setDbEmail] = useState();
   const [dbPassword, setDbPassword] = useState();
 
-  function signup(email, password) {
+  function signup(id, name, lastName, email, password) {
     /*------------- Azure DataBase Api-------------*/
     // let data = {
+    //   id: id,
+    //   name: name,
+    //   lastName: lastName,
     //   email: email,
     //   password: password
     // };
@@ -25,7 +28,6 @@ export function AuthProvider({ children }) {
     //   body: JSON.stringify(data),
     //   headers: { "Content-Type": "application/json" },
     // })
-    // return true;
     /*------------- Azure DataBase Api -------------*/
 
 
@@ -53,10 +55,6 @@ export function AuthProvider({ children }) {
     //     setDbEmail(jsonRes.recordset[0].Email);
     //     setDbPassword(jsonRes.recordset[0].Password);
     //   });
-    // if (email !== dbEmail || password !== dbPassword) {
-    //   return false;
-    // }
-    // return true;
     /*------------- Azure DataBase Api -------------*/
 
 

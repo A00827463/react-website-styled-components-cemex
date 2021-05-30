@@ -2,6 +2,7 @@ export {default as Navbar} from "./Navbar/Navbar";
 export {default as Navbar2} from "./Navbar/Navbar2";
 export {default as Footer} from "./Footer/Footer";
 export {default as InfoSection} from "./InfoSection/InfoSection";
+export {default as InfoSectionHome} from "./InfoSection/InfoSectionHome";
 export {default as Login} from "../pages/Login";
 export {default as SignUp} from "../pages/SignUp";
 export {default as Admin} from "../pages/Admin";

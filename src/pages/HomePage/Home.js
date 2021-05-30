@@ -1,12 +1,12 @@
 import React from 'react'
-import { homeObjFour} from "./Data"
-import { InfoSection} from "../../components"
+import { homeObjFour } from "./Data"
+import { InfoSectionHome } from "../../components"
 // import { Container } from "../../globalStyles"
 
 const Home = () => {
     return (
         <>
-            <InfoSection {...homeObjFour}/>
+            <InfoSectionHome {...homeObjFour}/>
             
         </>
     )

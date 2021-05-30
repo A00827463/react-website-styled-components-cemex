@@ -19,19 +19,19 @@ const dbUsers = [];
 //   res.json(dbUsers);
 // });
 
-app.post("/users", async (req, res) => {
-  try {
-    await sql.connect(config2);
-    const result = await sql.query`SELECT * FROM Users WHERE Users.Email = ${req.body.email}`
-    // const result = await sql.query`SELECT * FROM Users WHERE Users.Email = Ariel@Ariel.com`
-    // const result = await sql.query`SELECT * FROM Users`
-    // dbUsers.push(result);
-    console.log(result);
-    res.json(result);
-  } catch (e) {
-    res.status(500).send(e);
-  }
-});
+// app.post("/users", async (req, res) => {
+//   try {
+//     await sql.connect(config2);
+//     const result = await sql.query`SELECT * FROM Users WHERE Users.Email = ${req.body.email}`
+//     // const result = await sql.query`SELECT * FROM Users WHERE Users.Email = Ariel@Ariel.com`
+//     // const result = await sql.query`SELECT * FROM Users`
+//     // dbUsers.push(result);
+//     console.log(result);
+//     res.json(result);
+//   } catch (e) {
+//     res.status(500).send(e);
+//   }
+// });
 
 
 /*-------------- LOGIN  --------------*/
@@ -56,35 +56,10 @@ app.post("/login", async (req, res) => {
 
 /*-------------- SIGNUP  --------------*/
 // To register new user
-app.get("/signup", (req, res) => {
-  res.json(dbUsers);
-});
-
 app.post("/signup", async (req, res) => {
   try {
     await sql.connect(config2);
-    const result = await sql.query`INSERT INTO Users VALUES(null, null, null, 0, ${req.body.email}, ${req.body.password}, null)`
-    // const result = await sql.query`SELECT * FROM Users`
-    // dbUsers.push(result);
-    console.log(result);
-    res.json(result);
-  } catch (e) {
-    res.status(500).send(e);
-  }
-});
-
-/*-------------- LOGOUT  --------------*/
-// To register new user
-app.get("/loogout", (req, res) => {
-  res.json(dbUsers);
-});
-
-app.post("/logout", async (req, res) => {
-  try {
-    await sql.connect(config2);
-    // const result = await sql.query`SELECT * FROM Users WHERE Users.Name = ${req.body.name}`
-    const result = await sql.query`SELECT * FROM Users`
-    dbUsers.push(result);
+    const result = await sql.query`INSERT INTO Users VALUES(${req.body.id}, ${req.body.name}, ${req.body.lastName}, 0, ${req.body.email}, ${req.body.password}, 0)`
     console.log(result);
     res.json(result);
   } catch (e) {
@@ -93,12 +68,7 @@ app.post("/logout", async (req, res) => {
 });
 
 /*-------------- LeaderBoard  --------------*/
-// To register new user
-// app.get("/leaderboard", (req, res) => {
-//   res.json(dbUsers);
-// });
-
-app.post("/leaderboard", async (req, res) => {
+app.post("/users", async (req, res) => {
   try {
     await sql.connect(config2);
     const result = await sql.query`SELECT * FROM Users`

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const InfoSec = styled.div `
     color: #fff;
-    padding: 120px 0;
+    padding: 50px 0;
     background: ${({lightBg}) => (lightBg ? '#fff' : '#101522')};
 `;
 
@@ -76,7 +76,7 @@ export const ImgWrapper = styled.div `
 export const Img = styled.img `
     padding-right: 0;
     border: 0;
-    max-width: 100%;
+    max-width: 80%;
     vertical-align: middle;
     display: inline-block;
     max-height: 500px;

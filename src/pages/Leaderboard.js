@@ -13,7 +13,7 @@ const Leadreboard = () => {
   ];
 
   useEffect(() => {
-    fetch("/leaderboard", {
+    fetch("/users", {
       method: "POST",
     })
       .then((res) => {

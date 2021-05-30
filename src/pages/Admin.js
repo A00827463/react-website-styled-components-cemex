@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container } from "../globalStyles";
 import { Table } from "react-bootstrap";
 import { MdModeEdit } from "react-icons/md";
@@ -14,6 +14,20 @@ const Admin = () => {
     { id: 5, name: "Chistian", score: 200 },
     { id: 6, name: "Adrian", score: 150 },
   ];
+
+  useEffect(() => {
+    fetch("/users", {
+      method: "POST",
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+      })
+      .then((jsonRes) => {
+        jsonRes.recordset.map(user => dataUsuarios.push({id: user.UserID, name: user.Name, score: user.Score}))
+      });
+  })
 
   const [data, setData] = useState(dataUsuarios);
   const [modalEditar, setModalEditar] = useState(false);
@@ -85,7 +99,7 @@ const Admin = () => {
                 <th>ID</th>
                 <th>Username</th>
                 <th>Score</th>
-                <th>Acciones</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -132,10 +146,11 @@ const Admin = () => {
               </tr>
             </tfoot>
           </Table>
+
           <Modal isOpen={modalEditar}>
             <ModalHeader>
               <div>
-                <h3>Editar usuario</h3>
+                <h3>Edit User</h3>
               </div>
             </ModalHeader>
             <ModalBody>
@@ -150,7 +165,7 @@ const Admin = () => {
                 />
                 <br />
 
-                <label>usuario</label>
+                <label>Username</label>
                 <input
                   className="form-control"
                   type="text"
@@ -173,39 +188,42 @@ const Admin = () => {
             </ModalBody>
             <ModalFooter>
               <button className="btn btn-primary" onClick={() => editar()}>
-                Actualizar
+                Update
               </button>
               <button
                 className="btn btn-danger"
                 onClick={() => setModalEditar(false)}
               >
-                Cancelar
+                Cancel
               </button>
             </ModalFooter>
           </Modal>
 
+
           <Modal isOpen={modalEliminar}>
             <ModalBody>
-              Estas seguro que quieres eliminar el usuario{" "}
+              Are you shure you wish to delete user {" "}
               {usuarioSeleccionado && usuarioSeleccionado.name}
+              ?
             </ModalBody>
             <ModalFooter>
               <button className="btn btn-danger" onClick={() => eliminar()}>
-                Si
+                Delete
               </button>
               <button
                 className="btn btn-secondary"
                 onClick={() => setModalEliminar(false)}
               >
-                No
+                Cancel
               </button>
             </ModalFooter>
           </Modal>
 
+
           <Modal isOpen={modalInsertar}>
             <ModalHeader>
               <div>
-                <h3>Insertar usuario</h3>
+                <h3>Create New User</h3>
               </div>
             </ModalHeader>
             <ModalBody>
@@ -213,14 +231,14 @@ const Admin = () => {
                 <label>ID</label>
                 <input
                   className="form-control"
-                  readOnly
+                  // readOnly
                   type="text"
                   name="id"
-                  value={data[data.length - 1].id + 1}
+                  // value={data[data.length - 1].id + 1}
                 />
                 <br />
 
-                <label>usuario</label>
+                <label>Username</label>
                 <input
                   className="form-control"
                   type="text"
@@ -243,11 +261,11 @@ const Admin = () => {
             </ModalBody>
             <ModalFooter>
               <button className="btn btn-primary" onClick={() => insertar()}>
-                Incertar
+                Insertar
               </button>
               <button
                 className="btn btn-danger"
-                onClick={() => modalInsertar(false)}
+                onClick={() => setModalInsertar(false)}
               >
                 Cancelar
               </button>

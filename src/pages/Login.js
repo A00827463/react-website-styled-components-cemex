@@ -21,6 +21,8 @@ const Login = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
+  const [dbEmail, setDbEmail] = useState();
+  const [dbPassword, setDbPassword] = useState();
   const refreshPage = () => {
     window.location.reload();
   };
@@ -46,6 +48,23 @@ const Login = () => {
       setError("");
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
+      let data = {
+        email: emailRef.current.value,
+      };
+      fetch("/login", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" },
+      })
+        .then((res) => {
+          if (res.ok) {
+            return res.json();
+          }
+        })
+        .then((jsonRes) => {
+          setDbEmail(jsonRes.recordset[0].Email);
+          setDbPassword(jsonRes.recordset[0].Password);
+        });
       history.push("/");
       refreshPage();
     } catch(err) {

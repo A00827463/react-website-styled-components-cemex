@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { Container, Button } from "../globalStyles";
 import {
   InfoSec,
@@ -14,6 +14,9 @@ import {
 import { Alert } from "react-bootstrap";
 
 const SignUp = () => {
+  const nameRef = useRef();
+  const IdRef = useRef();
+  const lastNameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
@@ -36,7 +39,19 @@ const SignUp = () => {
     try {
       setError("");
       setLoading(true);
-      await signup(emailRef.current.value, passwordRef.current.value);
+      await signup(IdRef.current.value, nameRef.current.value, lastNameRef.current.value, emailRef.current.value, passwordRef.current.value);
+      let data = {
+        id: IdRef.current.value,
+        name: nameRef.current.value,
+        lastName: lastNameRef.current.value,
+        email: emailRef.current.value,
+        password: passwordRef.current.value
+      };
+      fetch("/signup", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" },
+      })
       history.push("/");
       refreshPage();
     } catch(err) {
@@ -57,23 +72,35 @@ const SignUp = () => {
             </ContentLoginSubText>
             {error && <Alert variant="danger">{error}</Alert>}
             <Form onSubmit={handleSubmit}>
+              
               <Form>
-                <FormInput name="name" type="name" placeholder="Name" />
+                <FormInput
+                  name="id"
+                  type="text"
+                  placeholder="ID"
+                  ref={IdRef}
+                  required
+                />
+              </Form>
+              <Form>
+                <FormInput name="name" type="name" placeholder="Name" ref={nameRef} required/>
               </Form>
               <Form>
                 <FormInput
                   name="last-name"
                   type="name"
                   placeholder="Last Name"
+                  ref={lastNameRef}
+                  required
                 />
               </Form>
-              <Form>
+              {/* <Form>
                 <FormInput
                   name="user-name"
                   type="name"
                   placeholder="Username"
                 />
-              </Form>
+              </Form> */}
               <Form>
                 <FormInput
                   name="email"
