@@ -66,19 +66,20 @@ const Login = () => {
           setDbEmail(jsonRes.recordset[0].Email);
           setDbPassword(jsonRes.recordset[0].Password);
           setDbID(jsonRes.recordset[0].UserID);
-          sessionStorage.setItem("ID", dbID);
           
         })
         .then(() => {
           sessionStorage.setItem("ID", dbID);
           
         });
-      history.push("/");
+      history.push("/?ID=" + sessionStorage.ID);
       refreshPage();
     } catch(err) {
       setError(err.message);
     }
     setLoading(false);
+
+
 
     /*------------- FireBase -------------*/
 

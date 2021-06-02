@@ -27,7 +27,8 @@ function App() {
   const history = createBrowserHistory();
   const path = history.location.pathname;
   // const app = express();
-
+  const id = sessionStorage.getItem("ID");
+  const route = "/?ID=" + id;
   return (
     <Router>
       
