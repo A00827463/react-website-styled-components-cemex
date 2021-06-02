@@ -6,9 +6,11 @@ const express = require("express");
 const app = express();
 const bcrypt = require('bcrypt');
 const sql = require("mssql");
+const cors = require("cors");
 const config2 = require("./config2");
 
 app.use(express.json());
+app.use(cors());
 
 const dbUsers = [];
 

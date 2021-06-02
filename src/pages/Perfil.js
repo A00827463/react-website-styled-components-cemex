@@ -23,6 +23,7 @@ const Perfil = () => {
     setError("");
     try {
       await logout();
+      sessionStorage.clear();
       history.push("/login");
       refreshPage();
     } catch {

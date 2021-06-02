@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { Container, Button } from "../globalStyles";
 import {
   InfoSec,
@@ -24,9 +24,16 @@ const Login = () => {
   const [dbEmail, setDbEmail] = useState();
   const [dbPassword, setDbPassword] = useState();
   const [dbID, setDbID] = useState();
+  let aux;
+
   const refreshPage = () => {
     window.location.reload();
   };
+
+  function getVar() {
+    console.log(sessionStorage.ID);
+    // console.log(dbID);
+  }
 
 
   async function handleSubmit(e) {
@@ -70,16 +77,19 @@ const Login = () => {
         })
         .then(() => {
           sessionStorage.setItem("ID", dbID);
-          
+          console.log(sessionStorage.ID);
+          console.log(dbID);
         });
+        
       history.push("/?ID=" + sessionStorage.ID);
       refreshPage();
     } catch(err) {
       setError(err.message);
     }
     setLoading(false);
+    // getVar();
 
-
+    
 
     /*------------- FireBase -------------*/
 
