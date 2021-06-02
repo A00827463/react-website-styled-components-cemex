@@ -83,7 +83,7 @@ app.post("/users", async (req, res) => {
 });
 
 /*-------------- Unity  --------------*/
-app.post("/unity/:ID", async (req, res) => {
+app.get("/unity/:ID", async (req, res) => {
   try {
     await sql.connect(config2);
     const result = await sql.query`SELECT * FROM Users WHERE Users.UserID = ${req.params.ID}`
