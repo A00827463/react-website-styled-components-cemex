@@ -4,6 +4,7 @@ import { InfoSectionHome } from "../../components"
 // import { Container } from "../../globalStyles"
 
 const Home = () => {
+    console.log(sessionStorage);
     return (
         <>
             <InfoSectionHome {...homeObjFour}/>

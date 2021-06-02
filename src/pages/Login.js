@@ -23,6 +23,7 @@ const Login = () => {
   const history = useHistory();
   const [dbEmail, setDbEmail] = useState();
   const [dbPassword, setDbPassword] = useState();
+  const [dbID, setDbID] = useState();
   const refreshPage = () => {
     window.location.reload();
   };
@@ -64,6 +65,13 @@ const Login = () => {
         .then((jsonRes) => {
           setDbEmail(jsonRes.recordset[0].Email);
           setDbPassword(jsonRes.recordset[0].Password);
+          setDbID(jsonRes.recordset[0].UserID);
+          sessionStorage.setItem("ID", dbID);
+          
+        })
+        .then(() => {
+          sessionStorage.setItem("ID", dbID);
+          
         });
       history.push("/");
       refreshPage();
@@ -71,6 +79,7 @@ const Login = () => {
       setError(err.message);
     }
     setLoading(false);
+
     /*------------- FireBase -------------*/
 
 
