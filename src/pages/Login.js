@@ -25,15 +25,57 @@ const Login = () => {
   const [dbPassword, setDbPassword] = useState();
   const [dbID, setDbID] = useState();
   let aux;
+  let email1;
+  const dataUsuarios = [];
 
   const refreshPage = () => {
     window.location.reload();
   };
 
-  function getVar() {
-    console.log(sessionStorage.ID);
-    // console.log(dbID);
-  }
+  // useEffect(() => {
+  //   if (emailRef.current.value){
+  //     email1 = emailRef.current.value;
+  //   } else {
+  //     email1 = "test@test.com";
+  //   }
+
+  //   let data = {
+  //     email: email1,
+  //   };
+  //   fetch("/login", {
+  //     method: "POST",
+  //     body: JSON.stringify(data),
+  //     headers: { "Content-Type": "application/json" },
+  //   })
+  //     .then((res) => {
+  //       if (res.ok) {
+  //         return res.json();
+  //       }
+  //     })
+  //     .then((jsonRes) => {
+  //       setDbEmail(jsonRes.recordset[0].Email);
+  //       setDbPassword(jsonRes.recordset[0].Password);
+  //       setDbID(jsonRes.recordset[0].UserID);
+  //     })
+  //     .then(() => {
+  //       sessionStorage.setItem("ID", dbID);
+  //       console.log(sessionStorage.ID);
+  //       console.log(dbID);
+  //     });
+  // });
+  useEffect(() => {
+    fetch("/users", {
+      method: "POST",
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+      })
+      .then((jsonRes) => {
+        jsonRes.recordset.map(user => dataUsuarios.push({id: user.UserID, email: user.Email}))
+      });
+  });
 
 
   async function handleSubmit(e) {
@@ -56,31 +98,12 @@ const Login = () => {
       setError("");
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
-      let data = {
-        email: emailRef.current.value,
-      };
-      fetch("/login", {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: { "Content-Type": "application/json" },
-      })
-        .then((res) => {
-          if (res.ok) {
-            return res.json();
-          }
-        })
-        .then((jsonRes) => {
-          setDbEmail(jsonRes.recordset[0].Email);
-          setDbPassword(jsonRes.recordset[0].Password);
-          setDbID(jsonRes.recordset[0].UserID);
-          
-        })
-        .then(() => {
-          sessionStorage.setItem("ID", dbID);
-          console.log(sessionStorage.ID);
-          console.log(dbID);
-        });
-        
+      dataUsuarios.map(user => {
+        if (user.email == emailRef.current.value){
+          sessionStorage.setItem("ID", user.id);
+          // console.log(sessionStorage.ID)
+        }
+      });
       history.push("/?ID=" + sessionStorage.ID);
       refreshPage();
     } catch(err) {
