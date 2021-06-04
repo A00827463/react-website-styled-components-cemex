@@ -1,3 +1,5 @@
+const sql = require("mssql");
+
 const config2 = {
   server: "compilationerror2.database.windows.net",
   database: "Reto2",
@@ -8,4 +10,15 @@ const config2 = {
     encrypt: true,
   },
 };
-module.exports = config2;
+
+const poolPromise = new sql.ConnectionPool(config2)
+  .connect()
+  .then((pool) => {
+    // console.log("Connected to MSSQL");
+    return pool;
+  })
+  .catch((err) => console.log("Database Connection Failed! Bad Config: ", err));
+module.exports = {
+  config2,
+  poolPromise,
+};

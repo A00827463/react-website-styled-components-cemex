@@ -7,7 +7,7 @@ const app = express();
 const bcrypt = require("bcrypt");
 const sql = require("mssql");
 const cors = require("cors");
-const config2 = require("./config2");
+const { config2, poolPromise } = require("./config2");
 
 app.use(express.json());
 app.use(cors());
@@ -81,7 +81,7 @@ app.post("/users", async (req, res) => {
   }
 });
 
-/*-------------- Unity  --------------*/
+/*-------------- Unity GET  --------------*/
 app.get("/unity/:ID", async (req, res) => {
   try {
     await sql.connect(config2);
@@ -93,5 +93,34 @@ app.get("/unity/:ID", async (req, res) => {
     res.status(500).send(e);
   }
 });
+
+/*-------------- Unity PUT  --------------*/
+app.put(
+  "/unity/:ID/:Name/:Score/:TareasRealizadas/:SubRealizadas/:CurrentPosition/:UnlockPoints",
+  async (req, res) => {
+    try {
+      console.log(req.params);
+      const pool = await poolPromise;
+      const result = await pool
+        .request()
+        .input("ID", sql.Int, req.params.ID)
+        .input("Name", sql.VarChar, req.params.Name)
+        .input("Score", sql.Int, req.params.Score)
+        .input("TareasRealizadas", sql.Int, req.params.TareasRealizadas)
+        .input("SubRealizadas", sql.Int, req.params.SubRealizadas)
+        .input("CurrentPosition", sql.Int, req.params.CurrentPosition)
+        .input("UnlockPoints", sql.Int, req.params.UnlockPoints)
+        .query(
+          "update Users set Score = @Score, Name = @Name, TareasRealizadas = @TareasRealizadas, SubRealizadas = @SubRealizadas, CurrentPosition = @CurrentPosition, UnlockPoints = @UnlockPoints where UserID = @ID"
+        );
+      console.log(`Preuba`);
+      console.log(result);
+      res.json(result);
+    } catch (error) {
+      res.status(500);
+      res.send(error.message);
+    }
+  }
+);
 
 app.listen(3001);
