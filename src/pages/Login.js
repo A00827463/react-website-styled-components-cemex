@@ -73,10 +73,11 @@ const Login = () => {
         }
       })
       .then((jsonRes) => {
-        jsonRes.recordset.map(user => dataUsuarios.push({id: user.UserID, email: user.Email}))
+        jsonRes.recordset.map((user) =>
+          dataUsuarios.push({ id: user.UserID, email: user.Email })
+        );
       });
   });
-
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -92,30 +93,26 @@ const Login = () => {
     // }
     // setLoading(false);
 
-    
     /*------------- FireBase -------------*/
     try {
       setError("");
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
-      dataUsuarios.map(user => {
-        if (user.email == emailRef.current.value){
+      dataUsuarios.map((user) => {
+        if (user.email == emailRef.current.value) {
           sessionStorage.setItem("ID", user.id);
           // console.log(sessionStorage.ID)
         }
       });
-      history.push("/?ID=" + sessionStorage.ID);
+      history.push("/");
       refreshPage();
-    } catch(err) {
+    } catch (err) {
       setError(err.message);
     }
     setLoading(false);
     // getVar();
 
-    
-
     /*------------- FireBase -------------*/
-
 
     // try {
     //   setError("");
