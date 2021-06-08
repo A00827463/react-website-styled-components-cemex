@@ -1,7 +1,8 @@
 import React from "react";
 import { Container } from "../../globalStyles";
 import { InfoSec, Img } from "./InfoSection.elements";
-// import game from "../../../game/index.html";
+// import x from "../../pages/Admin"
+// import Game from "/";
 
 const InfoSection = ({ img, alt }) => {
   return (
@@ -10,11 +11,13 @@ const InfoSection = ({ img, alt }) => {
         <Container>
           {/* <Img src={img} alt={alt} /> */}
           <iframe
-            src="../../../game/index.html"
+            src="/game/index.html"
+            // src ="../../pages/Admin"
             height="600px"
-            width="960px"
+            width="1080px"
             frameBorder="0"
           ></iframe>
+          {/* <Game/> */}
         </Container>
       </InfoSec>
     </>
