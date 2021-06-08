@@ -14,8 +14,8 @@ const InfoSection = ({ img, alt }) => {
           <iframe
             src={"/game/index.html?ID=" + id}
             // src ="../../pages/Admin"
-            height="600px"
-            width="1080px"
+            height="1080px"
+            width="1920px"
             frameBorder="0"
           ></iframe>
           {/* <Game/> */}
