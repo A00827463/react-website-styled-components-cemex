@@ -22,7 +22,7 @@ const Leadreboard = () => {
         }
       })
       .then((jsonRes) => {
-        jsonRes.recordset.map(user => dataUsuarios.push({id: user.UserID, name: user.Name, score: user.Score}))
+        jsonRes.recordset.map(user => dataUsuarios.push({id: user.UserID, name: user.Name, score: (100*user.CurrentPosition)}))
       });
   })
 
